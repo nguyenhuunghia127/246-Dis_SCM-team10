@@ -1,56 +1,50 @@
 package baitapUT;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
-public class PhepNhanUI extends JFrame {
-    private JTextField txtSo1, txtSo2, txtKetQua;
-    private JButton btnNhan;
+public class PhepNhanDonGian {
+    public static void main(String[] args) {
+        // Tạo frame
+        JFrame frame = new JFrame("Nhân hai số");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
 
-    public PhepNhanUI() {
-        setTitle("Chương trình Nhân hai số");
-        setSize(350, 200);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // căn giữa cửa sổ
+        // Ô nhập số 1
+        JTextField so1 = new JTextField();
+        so1.setBounds(50, 20, 200, 25);
+        frame.add(so1);
 
-        // Tạo các thành phần
-        JLabel lblSo1 = new JLabel("Số thứ nhất:");
-        JLabel lblSo2 = new JLabel("Số thứ hai:");
-        JLabel lblKetQua = new JLabel("Kết quả:");
+        // Ô nhập số 2
+        JTextField so2 = new JTextField();
+        so2.setBounds(50, 50, 200, 25);
+        frame.add(so2);
 
-        txtSo1 = new JTextField(10);
-        txtSo2 = new JTextField(10);
-        txtKetQua = new JTextField(10);
-        txtKetQua.setEditable(false);
+        // Nút "Nhân"
+        JButton btnNhan = new JButton("Nhân");
+        btnNhan.setBounds(100, 80, 100, 25);
+        frame.add(btnNhan);
 
-        btnNhan = new JButton("Nhân");
+        // Kết quả
+        JLabel ketQua = new JLabel("Kết quả: ");
+        ketQua.setBounds(50, 120, 200, 25);
+        frame.add(ketQua);
 
-        // Xử lý sự kiện khi nhấn nút
+        // Sự kiện khi nhấn nút
         btnNhan.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    double so1 = Double.parseDouble(txtSo1.getText());
-                    double so2 = Double.parseDouble(txtSo2.getText());
-                    double ketQua = so1 * so2;
-                    txtKetQua.setText(String.valueOf(ketQua));
+                    double a = Double.parseDouble(so1.getText());
+                    double b = Double.parseDouble(so2.getText());
+                    ketQua.setText("Kết quả: " + (a * b));
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(PhepNhanUI.this, "Vui lòng nhập đúng số!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                    ketQua.setText("Vui lòng nhập số hợp lệ.");
                 }
             }
         });
 
-        // Sắp xếp giao diện
-        setLayout(new GridLayout(4, 2, 10, 10));
-        add(lblSo1); add(txtSo1);
-        add(lblSo2); add(txtSo2);
-        add(lblKetQua); add(txtKetQua);
-        add(new JLabel()); add(btnNhan);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new PhepNhanUI().setVisible(true);
-        });
+        // Hiển thị giao diện
+        frame.setVisible(true);
     }
 }
